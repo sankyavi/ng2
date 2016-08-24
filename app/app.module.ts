@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
+import { HeroDetailComponent } from './hero-detail.component';
 
 @NgModule({
   //We're passing metadata to the NgModule decorator function:
   imports:      [ BrowserModule,FormsModule ],  //imports - the other modules that export material we need in this module.
-  declarations: [ AppComponent ],   //components and directives that belong to this module.
+  declarations: [ AppComponent, HeroDetailComponent ],   //components and directives that belong to this module.
   bootstrap:    [ AppComponent ]    // identifies the root component that Angular should bootstrap when it starts the application
 })
 export class AppModule { }

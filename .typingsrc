@@ -1,0 +1,3 @@
+proxy=http://377304:Chipset_22@proxy.cognizant.com:6050/
+https-proxy=http://377304:Chipset_22@proxy.cognizant.com:6050/
+rejectUnauthorized=false

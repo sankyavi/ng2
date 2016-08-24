@@ -1,27 +1,13 @@
 //import the Angular 2 core so that our component code can have access to the @Component decorator
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
-import { HeroDetailComponent } from './hero-detail.component';
-
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
+import { HeroService } from './hero.service';
 
 
 // decorater that lets angular know and register the Component
 @Component({
   selector: 'my-app', // The selector specifies a simple CSS selector for an HTML element that represents the component.
-
+  
   //The template specifies the component's companion template, 
   //written in an enhanced form of HTML that tells Angular how to render this component's view.
   template: `
@@ -35,18 +21,32 @@ const HEROES: Hero[] = [
   </li>
   </ul>
   <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-  `
+  `,
+  providers: [HeroService]
 })
+
+
 //We export AppComponent so that we can import it elsewhere in our application
-export class AppComponent {
+export class AppComponent implements OnInit {
   title : string =  "tour of heroes";
-  heroes =  HEROES;
+  heroes : Hero[];
   selectedHero : Hero;
+
+  constructor(private heroService: HeroService) { }
+  
+  getHeroes(): void {
+    this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+  }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
 
   onselect (hero:Hero): void {
     this.selectedHero = hero;
   }
- }   // AppComponent is the root of the application
+   
+ }  // AppComponent is the root of the application
 
 
 

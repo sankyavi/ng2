@@ -1,5 +1,6 @@
 //import the Angular 2 core so that our component code can have access to the @Component decorator
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -10,19 +11,8 @@ import { HeroService } from './hero.service';
   
   //The template specifies the component's companion template, 
   //written in an enhanced form of HTML that tells Angular how to render this component's view.
-  template: `
-  <h1>{{title}}</h1>
-  <h2>My Heroes</h2>
-  <ul class="heroes">
-  <li *ngFor="let hero of heroes"
-    [class.selected]="hero === selectedHero"
-    (click)="onselect(hero)">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
-  </li>
-  </ul>
-  <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-  `,
-  providers: [HeroService]
+  templateUrl: 'app/heroes.component.html'
+  
 })
 
 
@@ -32,7 +22,10 @@ export class HeroesComponent implements OnInit {
   heroes : Hero[];
   selectedHero : Hero;
 
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private heroService: HeroService,
+    private router : Router
+  ) { }
   
   getHeroes(): void {
     this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
@@ -46,6 +39,10 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = hero;
   }
    
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedHero.id]);
+  }
+
  }  // AppComponent is the root of the application
 
 

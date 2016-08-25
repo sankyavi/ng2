@@ -14,7 +14,7 @@ import { HeroService }  from './hero.service';
   //We're passing metadata to the NgModule decorator function:
   imports:      [ BrowserModule,FormsModule, routing ],  //imports - the other modules that export material we need in this module.
   declarations: [ AppComponent, HeroDetailComponent, HeroesComponent, DashboardComponent ],   //components and directives that belong to this module.
-  providers : [HeroService],
+  providers :   [HeroService],
   bootstrap:    [ AppComponent ]    // identifies the root component that Angular should bootstrap when it starts the application
 })
 export class AppModule { }
